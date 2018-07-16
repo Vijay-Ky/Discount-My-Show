@@ -1,0 +1,525 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+/**
+* responsive strategy
+*/
+@phone_only: 599px;
+@tablet_portrait_min: 600px;
+@tablet_portrait_max: 899px;
+@tablet_landscape_min: 900px;
+@tablet_landscape_max: 1199px;
+@desktop_min: 1200px;
+@desktop_max: 1799px;
+@big_desktop_min: 1800px;
+
+/**
+* style variables
+*/
+@box_shadow_2dp: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+@box_shadow_4dp: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+
+/**
+* style colors
+*/
+@background: #EEEEEE;
+@card: #EEEEEE;
+
+@light_gray: #fafafa;
+@gray: #E0E0E0;
+@dark_gray: #9E9E9E;
+
+@pink: #FC5185;
+@light_pink: #FFE7EE;
+
+/**
+* root style
+*/
+:root, html, body {
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  height: 100%;
+  margin: 0;
+}
+
+/**
+* typography
+*/
+h1, h2, h3, h4, h5, p {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+/**
+* breaths
+*/
+.content--padding() {
+  padding: 8px;
+  @media (min-width: 960px) {
+    padding: 16px; 
+  }
+}
+.content--margin() {
+  margin: 8px;
+  @media (min-width: 960px) {
+    margin: 16px; 
+  }
+}
+
+/**
+********************************************
+* Grid layout
+********************************************
+*/
+
+/**
+* grid container
+*/
+#grid {
+  height: 100%;
+  display: grid;
+  // phones
+  @media (max-width: @phone_only) {
+    grid-template-rows: 5% auto auto;
+    grid-template-columns: 5% auto 5%;
+  }
+  // tablet portrait
+  @media (min-width: @tablet_portrait_min) and (max-width: @tablet_portrait_max) {
+    grid-template-rows: 5% auto auto;
+    grid-template-columns: 25% auto 25%;
+  }
+  // tablet landscape
+  @media (min-width: @tablet_landscape_min) and (max-width: @tablet_landscape_max) {
+    grid-template-rows: 5% auto auto;
+    grid-template-columns: 30% auto 30%;
+  }
+  // desktops
+  @media (min-width: @desktop_min) and (max-width: @desktop_max) {
+    grid-template-rows: 5% auto auto;
+    grid-template-columns: 35% auto 35%;
+  }
+  // large desktops
+  @media (min-width: @big_desktop_min) {
+    grid-template-rows: 5% auto 10%;
+    grid-template-columns: 35% auto 35%;
+  }
+}
+#grid__content {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/**
+********************************************
+* Flex components
+********************************************
+*/
+
+/**
+* button
+*/
+button {
+  .button--layout();
+  &.raised{
+    box-shadow: @box_shadow_2dp;
+    background-color: @light_gray;
+    &:active{
+      box-shadow: @box_shadow_2dp;
+    }
+  }
+}
+.button--layout() {
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  border: none;
+  border-radius: 2px;
+  transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+  user-select: none;
+  color: rgba(0,0,0,.87);
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 36px;
+  letter-spacing: .01em;
+  line-height: 36px;
+  margin: 14px 8px 8px 8px;
+  min-width: 88px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 8px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  &:not([disabled]){
+    box-shadow: none;
+    cursor: pointer;
+  }
+  &[disabled]{
+    color: rgba(0,0,0,.38);
+    pointer-events: none;
+  }
+}
+
+/**
+* card
+*/
+#card {
+  .content--padding();
+  background-color: white;
+  box-shadow: @box_shadow_2dp;
+  -moz-box-shadow: @box_shadow_2dp;
+  -webkit-box-shadow: @box_shadow_2dp;
+  transition: box-shadow 0.6s ease;
+  &:hover {
+    box-shadow: @box_shadow_4dp;
+    -moz-box-shadow: @box_shadow_4dp;
+    -webkit-box-shadow: @box_shadow_4dp;
+  }
+}
+
+/**
+********************************************
+* Form
+********************************************
+*/
+
+/**
+* form
+*/
+form.form {
+  display: flex;
+  flex-flow: column wrap;
+}
+// form title
+.form > h1 {
+  text-transform: uppercase;
+  align-self: center;
+}
+.form > .signup__field {
+  flex: 1;
+  min-width: 70%;
+  align-self: center;
+  display: flex;
+  flex-flow: column wrap;
+  padding: 8px;
+  & label {
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 3px;
+    &::after {
+      content: ':';
+    }
+  }
+  & input {
+    color: #666666;
+    border-bottom: 1px solid @dark_gray;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 0 5px;
+    margin: 0;
+    -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+    -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+    box-sizing: border-box;
+    min-height: 30px;
+    transition: background 250ms ease-in-out;
+  }
+}
+// color fieldset
+.form > fieldset {
+  flex: auto;
+  flex-flow: column;
+  align-self: center;
+  min-width: 70%;
+  border: none;
+  box-shadow: 0px 0px 0px 2px @gray;
+  transition: box-shadow 0.6s ease;
+  padding: 10px;
+  margin-top: 20px;
+  & legend {
+    display: none;
+  }
+  & .signup__field {
+    display: flex;
+    flex-flow: column;
+    & > label,
+    & > .label,
+    & > .select-field
+    {
+      flex: auto;
+      align-self: center;
+    }
+    & select {
+      border: none;
+      width: 100%;
+      outline: none;
+      cursor: pointer;
+      &:focus {
+        outline-color: #666666;
+        border: 1px solid #666666;
+      }
+    }
+    & > .label {
+      font-weight: bold;
+    }
+    & > .select-field,
+    & > .field__radio-inputs{
+      margin: 12px 0;
+    }
+    & > .field__radio-inputs {
+      flex: auto;
+      align-self: center;
+    }
+  }
+}
+
+.form > .signup__amazing {
+  margin-top: 10px;
+  flex: auto;
+  align-self: center;
+  input[type="checkbox"],
+  & > label {
+    cursor: pointer;
+  }
+}
+
+.form > .signup__button {
+  flex: auto;
+  align-self: flex-end;
+}
+
+/**
+********************************************
+* Layout colors
+********************************************
+*/
+
+/**
+* (default) pink color
+*/
+html.pink {
+  animation: fill--pink 2s ease-in-out alternate infinite;
+}
+@keyframes fill--pink {
+  from {
+    background-color: @light_pink;
+  }
+  to {
+    background-color: darken(@light_pink, 12%);
+  }
+}
+button.pink:hover{
+  background-color: rgba(252,81,133,.12);
+}
+button.pink:active{
+  background-color: rgba(252,81,133,.25);
+}
+h1.pink::after {
+  content: '  ❤';
+  margin-left: 5px;
+  color: @pink;
+  animation: pulse-pink 2s ease alternate infinite;
+}
+@keyframes pulse-pink {
+  100% {
+    margin-left: .5px;
+    color: rgba(252, 81, 133,.35);
+  }
+}
+input.pink:hover {
+  border-bottom: 2px solid #FC5185;
+}
+
+input.pink:focus {
+  background-color: @light_pink;
+  border-bottom: 2px solid #FC5185;
+}
+fieldset.pink:hover {
+  box-shadow: 0px 0px 0px 4px @pink;
+  // box-shadow: @box_shadow_4dp;
+}
+
+/**
+* red color
+*/
+html.red {
+  animation: fill--red 2s ease-in-out alternate infinite;
+}
+@keyframes fill--red {
+  from {
+    background-color: #ffe7e7;
+  }
+  to {
+    background-color: lighten(red, 22%);
+  }
+}
+button.red:hover{
+  background-color: rgba(255,0,0,.12);
+}
+button.red:active{
+  background-color: rgba(255,0,0,.25);
+}
+h1.red::after {
+  content: '  ❤';
+  margin-left: 5px;
+  color: red;
+  animation: pulse-red 2s ease alternate infinite;
+}
+@keyframes pulse-red {
+  100% {
+    margin-left: .5px;
+    color: rgba(255,0,0,.35);
+  }
+}
+input.red:hover {
+  border-bottom: 2px solid red;
+}
+
+input.red:focus {
+  background-color: #ffe7e7;
+  border-bottom: 2px solid red;
+}
+fieldset.red:hover {
+  box-shadow: 0px 0px 0px 4px red;
+  // box-shadow: @box_shadow_4dp;
+}
+
+/**
+* green color
+*/
+html.green {
+  animation: fill--green 2s ease-in-out alternate infinite;
+}
+@keyframes fill--green {
+  from {
+    background-color: #e8ffe8;
+  }
+  to {
+    background-color: green;
+  }
+}
+button.green:hover{
+  background-color: rgba(0,128,0,.12);
+}
+button.green:active{
+  background-color: rgba(0,128,0,.25);
+}
+h1.green::after {
+  content: '  ❤';
+  margin-left: 5px;
+  color: green;
+  animation: pulse-green 2s ease alternate infinite;
+}
+@keyframes pulse-green {
+  100% {
+    margin-left: .5px;
+    color: rgba(0,128,0,.35);
+  }
+}
+input.green:hover {
+  border-bottom: 2px solid green;
+}
+
+input.green:focus {
+  background-color: #e8ffe8;
+  border-bottom: 2px solid green;
+}
+fieldset.green:hover {
+  box-shadow: 0px 0px 0px 4px green;
+  // box-shadow: @box_shadow_4dp;
+}
+
+/**
+* blue color
+*/
+html.blue {
+  animation: fill--blue 2s ease-in-out alternate infinite;
+}
+@keyframes fill--blue {
+  from {
+    background-color: #e7e7ff;
+  }
+  to {
+    background-color: blue;
+  }
+}
+button.blue:hover{
+  background-color: rgba(0,0,255,.12);
+}
+button.blue:active{
+  background-color: rgba(0,0,255,.25);
+}
+h1.blue::after {
+  content: '  ❤';
+  margin-left: 5px;
+  color: blue;
+  animation: pulse-blue 2s ease alternate infinite;
+}
+@keyframes pulse-blue {
+  100% {
+    margin-left: .5px;
+    color: rgba(0,0,255,.35);
+  }
+}
+input.blue:hover {
+  border-bottom: 2px solid blue;
+}
+
+input.blue:focus {
+  background-color: #e7e7ff;
+  border-bottom: 2px solid blue;
+}
+fieldset.blue:hover {
+  box-shadow: 0px 0px 0px 4px blue;
+  // box-shadow: @box_shadow_4dp;
+}
+
+/**
+* purple color
+*/
+html.purple {
+  animation: fill--purple 2s ease-in-out alternate infinite;
+}
+@keyframes fill--purple {
+  from {
+    background-color: #ffe8ff;
+  }
+  to {
+    background-color: purple;
+  }
+}
+button.purple:hover{
+  background-color: rgba(128,0,128,.12);
+}
+button.purple:active{
+  background-color: rgba(128,0,128,.25);
+}
+h1.purple::after {
+  content: '  ❤';
+  margin-left: 5px;
+  color: purple;
+  animation: pulse-purple 2s ease alternate infinite;
+}
+@keyframes pulse-purple {
+  100% {
+    margin-left: .5px;
+    color: rgba(128,0,128,.35);
+  }
+}
+input.purple:hover {
+  border-bottom: 2px solid purple;
+}
+
+input.purple:focus {
+  background-color: #ffe8ff;
+  border-bottom: 2px solid purple;
+}
+fieldset.purple:hover {
+  box-shadow: 0px 0px 0px 4px purple;
+  // box-shadow: @box_shadow_4dp;
+}
